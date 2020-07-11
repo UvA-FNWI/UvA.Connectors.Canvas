@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UvA.Connectors.Canvas", "UvA.Connectors.Canvas.csproj", "{6D2B9228-901F-42EB-AA5D-5526956A3052}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D2B9228-901F-42EB-AA5D-5526956A3052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D2B9228-901F-42EB-AA5D-5526956A3052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D2B9228-901F-42EB-AA5D-5526956A3052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D2B9228-901F-42EB-AA5D-5526956A3052}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A88D7482-E831-4E52-86B6-D3E2394D9C94}
+	EndGlobalSection
+EndGlobal
