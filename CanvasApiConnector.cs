@@ -63,7 +63,7 @@ namespace UvA.DataNose.Connectors.Canvas
             TargetUrl = canvasUrl;
             this.BaseUrl = $"{canvasUrl}/api/v1/";
             this.AccessToken = token;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
         }
 
         private T FindObjectById<T>(int id, bool skip_retrieval = false) where T : CanvasObject
