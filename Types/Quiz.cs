@@ -12,7 +12,7 @@ namespace UvA.DataNose.Connectors.Canvas
 {
     public class Quiz : CanvasObject
     {
-        public Quiz(CanvasConnector conn) { Connector = conn; }
+        public Quiz(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Assignment {ID}: {Name}";
         internal override string CanvasObjectID => "quiz";
@@ -38,7 +38,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
     public class QuizSubmission : CanvasObject
     {
-        public QuizSubmission(CanvasConnector conn) { Connector = conn; }
+        public QuizSubmission(CanvasApiConnector conn) { Connector = conn; }
 
         internal override string GetUrl => $"courses/{CourseID}/quizzes/{QuizID}/submissions/{ID}";
 
@@ -75,7 +75,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
     public class QuizReport : CanvasObject
     {
-        public QuizReport(CanvasConnector conn) { Connector = conn; }
+        public QuizReport(CanvasApiConnector conn) { Connector = conn; }
 
         internal override string SaveUrl => $"courses/{CourseID}/quizzes/{QuizID}/reports/{ID}";
         internal override string GetUrl => SaveUrl;

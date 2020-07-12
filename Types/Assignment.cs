@@ -38,7 +38,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
     public class Assignment : CanvasObject
     {
-        public Assignment(CanvasConnector conn) { Connector = conn; }
+        public Assignment(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Assignment {ID}: {Name}";
         internal override string CanvasObjectID => "assignment";

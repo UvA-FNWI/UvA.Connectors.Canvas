@@ -18,7 +18,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
     public class File : CanvasObject
     {
-        public File(CanvasConnector conn) { Connector = conn; }
+        public File(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"File {ID}: {Name}";
         internal override string SaveUrl => ID == null ? $"courses/{CourseID}/files/{ID}" : $"files/{ID}";

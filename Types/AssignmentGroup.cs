@@ -9,7 +9,7 @@ namespace UvA.DataNose.Connectors.Canvas
 {
     public class AssignmentGroup : CanvasObject
     {
-        public AssignmentGroup(CanvasConnector conn) { Connector = conn; }
+        public AssignmentGroup(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Assignment group {ID}: {Name}";
         internal override string CanvasObjectID => "assignment_group";

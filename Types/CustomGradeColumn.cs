@@ -9,7 +9,7 @@ namespace UvA.DataNose.Connectors.Canvas
 {
     public class CustomGradeColumn : CanvasObject
     {
-        public CustomGradeColumn(CanvasConnector conn) { Connector = conn; }
+        public CustomGradeColumn(CanvasApiConnector conn) { Connector = conn; }
 
         internal override string CanvasObjectID => "column";
         internal override string SaveUrl => $"courses/{CourseID}/custom_gradebook_columns/{ID}";

@@ -14,7 +14,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
         internal bool isRetrieved;
         [JsonIgnore]
-        public CanvasConnector Connector { get; set; }
+        public CanvasApiConnector Connector { get; set; }
         internal string EntityName => CanvasObjectID ?? this.GetType().Name;
 
         internal virtual string GetUrl => this.GetType().Name.ToLower() + "s/" + ID;

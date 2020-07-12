@@ -18,7 +18,7 @@ using UvA.Connectors.Canvas.Helpers;
 
 namespace UvA.DataNose.Connectors.Canvas
 {
-    public class CanvasConnector
+    public class CanvasApiConnector
     {
         public string TargetUrl { get; private set; }
         protected string BaseUrl { get; private set; }
@@ -58,7 +58,7 @@ namespace UvA.DataNose.Connectors.Canvas
         /// </summary>
         /// <param name="canvasUrl">Target Canvas instance URL, e.g. https://example.instructure.com/</param>
         /// <param name="token">Canvas access token</param>
-        public CanvasConnector(string canvasUrl, string token) : base()
+        public CanvasApiConnector(string canvasUrl, string token) : base()
         {
             TargetUrl = canvasUrl;
             this.BaseUrl = $"{canvasUrl}/api/v1/";

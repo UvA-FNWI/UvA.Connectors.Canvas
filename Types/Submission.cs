@@ -9,7 +9,7 @@ namespace UvA.DataNose.Connectors.Canvas
 {
     public class Submission : CanvasObject
     {
-        public Submission(CanvasConnector conn) { Connector = conn; }
+        public Submission(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Submission {ID}";
         internal override string CanvasObjectID => "submission";

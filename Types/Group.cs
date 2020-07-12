@@ -9,7 +9,7 @@ namespace UvA.DataNose.Connectors.Canvas
 {
     public class Group : CanvasObject
     {
-        public Group(CanvasConnector conn) { Connector = conn; }
+        public Group(CanvasApiConnector conn) { Connector = conn; }
 
         internal override string GetUrl => $"groups/{ID}";
         internal override string SaveUrl => $"group_categories/{GroupCategoryID}/groups/{ID}";

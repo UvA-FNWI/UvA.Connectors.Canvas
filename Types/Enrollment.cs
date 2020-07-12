@@ -27,7 +27,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
     public class Enrollment : CanvasObject
     {
-        public Enrollment(CanvasConnector conn) { Connector = conn; }
+        public Enrollment(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Enrollment {User?.Name} in {CourseID}";
         internal override string CanvasObjectID => "enrollment";

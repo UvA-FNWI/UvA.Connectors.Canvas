@@ -9,7 +9,7 @@ namespace UvA.DataNose.Connectors.Canvas
 {
     public class ExternalFeed : CanvasObject
     {
-        public ExternalFeed(CanvasConnector conn) { Connector = conn; }
+        public ExternalFeed(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"External feed {ID}: {Name}";
         internal override string CanvasObjectID => "external_feed";

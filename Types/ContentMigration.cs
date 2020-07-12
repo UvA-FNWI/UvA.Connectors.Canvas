@@ -29,7 +29,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
     public class ContentMigration : CanvasObject
     {
-        public ContentMigration(CanvasConnector conn) { Connector = conn; }
+        public ContentMigration(CanvasApiConnector conn) { Connector = conn; }
 
         internal override string SaveUrl => $"courses/{CourseID}/content_migrations";
         internal override string GetUrl => $"{SaveUrl}/{ID}";
@@ -97,7 +97,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
     public class ContentExport : CanvasObject
     {
-        public ContentExport(CanvasConnector conn) { Connector = conn; }
+        public ContentExport(CanvasApiConnector conn) { Connector = conn; }
 
         internal override string SaveUrl => $"courses/{CourseID}/content_exports";
         internal override string GetUrl => $"{SaveUrl}/{ID}";

@@ -19,7 +19,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
     public class ExternalTool : CanvasObject
     {
-        public ExternalTool(CanvasConnector conn) { Connector = conn; }
+        public ExternalTool(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"External tool {ID}: {Name}";
         internal override string CanvasObjectID => "external_tool";

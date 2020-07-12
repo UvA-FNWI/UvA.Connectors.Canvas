@@ -9,7 +9,7 @@ namespace UvA.DataNose.Connectors.Canvas
 {
     public class Folder : CanvasObject
     {
-        public Folder(CanvasConnector conn) { Connector = conn; }
+        public Folder(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Folder {ID}: {Name}";
         internal override string SaveUrl => $"courses/{CourseID}/folders/{ID}";

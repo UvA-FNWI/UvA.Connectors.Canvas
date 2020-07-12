@@ -15,7 +15,7 @@ namespace UvA.DataNose.Connectors.Canvas
     /// </summary>
     public class AppointmentGroup : CanvasObject
     {
-        public AppointmentGroup(CanvasConnector conn) { Connector = conn; }
+        public AppointmentGroup(CanvasApiConnector conn) { Connector = conn; }
 
         internal override string CanvasObjectID => "appointment_group";
         public override string ToString() => $"Appointment group {ID}: {Title}";
@@ -36,7 +36,7 @@ namespace UvA.DataNose.Connectors.Canvas
     public class Appointment : CanvasObject
     {
         public Appointment() { }
-        public Appointment(CanvasConnector conn) { Connector = conn; }
+        public Appointment(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Appointment {ID}: {Title}";
         

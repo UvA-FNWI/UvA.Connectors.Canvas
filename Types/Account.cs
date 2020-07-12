@@ -9,7 +9,7 @@ namespace UvA.DataNose.Connectors.Canvas
 {
     public class Account : CanvasObject
     {
-        public Account(CanvasConnector conn) { Connector = conn; }
+        public Account(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Account {ID}: {Name}";
         internal override string CanvasObjectID => "account";

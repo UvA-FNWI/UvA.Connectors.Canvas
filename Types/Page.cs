@@ -9,7 +9,7 @@ namespace UvA.DataNose.Connectors.Canvas
 {
     public class Page : CanvasObject
     {
-        public Page(CanvasConnector conn) { Connector = conn; }
+        public Page(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Page {Url}: {Title}";
         internal override string SaveUrl => $"courses/{CourseID}/pages/{Url}";

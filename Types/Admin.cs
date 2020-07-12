@@ -9,7 +9,7 @@ namespace UvA.DataNose.Connectors.Canvas
 {
     public class Admin : CanvasObject
     {
-        public Admin(CanvasConnector conn) { Connector = conn; }
+        public Admin(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Admin {ID}: role {RoleID}, account {AccountID}";
         internal override string SaveUrl => $"accounts/{AccountID}/admins/{User?.ID}";

@@ -14,7 +14,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
     public class CalendarEvent : CanvasObject
     {
-        public CalendarEvent(CanvasConnector conn) { Connector = conn; }
+        public CalendarEvent(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"CalendarEvent {ID}: {Title}";
         internal override string CanvasObjectID => "calendar_event";

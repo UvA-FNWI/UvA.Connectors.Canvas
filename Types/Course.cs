@@ -38,7 +38,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
     public class Course : CanvasObject
     {
-        public Course(CanvasConnector conn) { Connector = conn; }
+        public Course(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Course {ID}: {Name} ({CourseCode})";
         internal override string CanvasObjectID => "course";

@@ -9,7 +9,7 @@ namespace UvA.DataNose.Connectors.Canvas
 {
     public class Discussion : CanvasObject
     {
-        public Discussion(CanvasConnector conn) { Connector = conn; }
+        public Discussion(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Discussion {ID}: {Title}";
         internal override string CanvasObjectID => "discussion_topic";
@@ -38,7 +38,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
     public class DiscussionEntry : CanvasObject
     {
-        public DiscussionEntry(CanvasConnector conn) { Connector = conn; }
+        public DiscussionEntry(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Entry {ID}: {Message}";
         internal override string SaveUrl => $"courses/{CourseID}/discussion_topics/{TopicID}/entries/{ID}";
@@ -63,7 +63,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
     public class DiscussionReply : CanvasObject
     {
-        public DiscussionReply(CanvasConnector conn) { Connector = conn; }
+        public DiscussionReply(CanvasApiConnector conn) { Connector = conn; }
 
         public override string ToString() => $"Reply {ID}: {Message}";
         internal override string SaveUrl => $"{Entry.SaveUrl}/replies/{ID}";
