@@ -298,12 +298,26 @@ namespace UvA.DataNose.Connectors.Canvas
         GraphQLHttpClient Client => _Client ?? (_Client = new GraphQLHttpClient(new GraphQLHttpClientOptions
         {
             EndPoint = new Uri(BaseUrl.Replace("v1", "graphql")),
-            ConfigureWebsocketOptions = opt => opt.SetRequestHeader("Authorization", $"Bearer {AccessToken}")
+            HttpMessageHandler = new BearerTokenHandler
+            {
+                AccessToken = AccessToken
+            }
         }, new NewtonsoftJsonSerializer()));
+
+        class BearerTokenHandler : HttpClientHandler
+        {
+            public string AccessToken { get; set; }
+
+            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            {
+                request.Headers.Add("Authorization", $"Bearer {AccessToken}");
+                return base.SendAsync(request, cancellationToken);
+            }
+        }
 
         public void SetPostPolicy(int courseId, bool postManually)
         {
-            var res = Client.SendMutationAsync<string>(new GraphQLRequest
+            var res = Client.SendMutationAsync<JObject>(new GraphQLRequest
             {
                 Query = @"
                 mutation SetPolicy($courseId: ID!, $postManually: Boolean!) {
