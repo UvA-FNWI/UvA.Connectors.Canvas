@@ -73,6 +73,17 @@ namespace UvA.DataNose.Connectors.Canvas
         public string SecureParameters { get; set; }
         [JsonProperty("rubric")]
         public RubricCriterion[] RubricCriteria { get; set; }
+        
+        /// <summary>
+        /// Undocumented property. Should be 'online' to set a similarity checking tool
+        /// </summary>
+        [JsonProperty("submission_type")]
+        public string SubmissionType { get; set; }
+
+        [JsonProperty("configuration_tool_type")]
+        public string ToolType { get; set; }
+        [JsonProperty("similarityDetectionTool")]
+        public string SimilarityTool { get; set; }
 
         // These are undocumented, but useful
         [JsonProperty("original_course_id")]
