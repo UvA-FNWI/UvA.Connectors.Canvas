@@ -155,7 +155,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
         private List<AssignmentGroup> _AssignmentGroups;
         [JsonIgnore]
-        public List<AssignmentGroup> AssignmentGroups => _AssignmentGroups ?? (_AssignmentGroups = Connector.RetrieveCollection<AssignmentGroup>(this, "assignments", path: "assignment_group"));
+        public List<AssignmentGroup> AssignmentGroups => _AssignmentGroups ?? (_AssignmentGroups = Connector.RetrieveCollection<AssignmentGroup>(this, "assignments", path: "assignment_group", initFunc: g => { g.Assignments?.ForEach(z => z.Connector = Connector); }));
 
         private Dictionary<string, bool> _Permissions;
         [JsonIgnore]
