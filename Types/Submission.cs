@@ -45,6 +45,12 @@ namespace UvA.DataNose.Connectors.Canvas
         public int? GraderID { get; set; }
 
         /// <summary>
+        /// Submission body for text submissions
+        /// </summary>
+        [JsonProperty("body")]
+        public string Body { get; set; }
+
+        /// <summary>
         /// Use this for reading excused status
         /// </summary>
         [JsonProperty("excused")]
