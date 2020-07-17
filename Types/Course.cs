@@ -194,7 +194,7 @@ namespace UvA.DataNose.Connectors.Canvas
         /// </summary>
         /// <param name="sisuserIDs">Optional. If set, retrieve only the submissions for these students</param>
         /// <param name="gradedOnly">If <c>true</c>, retrieve only submitted with a grade</param>
-        public IEnumerable<SubmissionGroup> GetSubmissions(string[] sisuserIDs = null, bool gradedOnly = true)
+        public IEnumerable<SubmissionGroup> GetSubmissions(string[] sisuserIDs, bool gradedOnly = true)
         {
             var pars = new List<(string, string)>
             {
