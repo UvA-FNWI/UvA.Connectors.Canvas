@@ -187,10 +187,17 @@ namespace UvA.DataNose.Connectors.Canvas
         /// <param name="sisuserID">Optional. If set, retrieve only the submissions for this student</param>
         /// <param name="gradedOnly">If <c>true</c>, retrieve only submitted with a grade</param>
         public IEnumerable<SubmissionGroup> GetSubmissions(string sisuserID = null, bool gradedOnly = true)
+            => GetSubmissions(new[] { sisuserID }, gradedOnly);
+
+        /// <summary>
+        /// Returns all graded submissions for the course, with limited fields for performance reasons
+        /// </summary>
+        /// <param name="sisuserIDs">Optional. If set, retrieve only the submissions for these students</param>
+        /// <param name="gradedOnly">If <c>true</c>, retrieve only submitted with a grade</param>
+        public IEnumerable<SubmissionGroup> GetSubmissions(string[] sisuserIDs = null, bool gradedOnly = true)
         {
             var pars = new List<(string, string)>
             {
-                ("student_ids[]", sisuserID != null ? "sis_user_id:" + sisuserID : "all"),
                 ("grouped", "true"),
                 ("exclude_response_fields[]", "preview_url"),
                 ("response_fields[]", "assignment_id"),
@@ -199,6 +206,10 @@ namespace UvA.DataNose.Connectors.Canvas
                 ("response_fields[]", "excused"),
                 ("response_fields[]", "id"),
             };
+            if (sisuserIDs != null)
+                pars.AddRange(sisuserIDs.Select(s => ("student_ids[]", $"sis_user_id:{s}")));
+            else
+                pars.Add(("student_ids[]", "all"));
             if (gradedOnly)
                 pars.Add(("workflow_state", "graded"));
             else
