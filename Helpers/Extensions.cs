@@ -41,5 +41,16 @@ namespace UvA.Connectors.Canvas.Helpers
             }
             return builder.ToString();
         }
+
+        /// <summary>
+        /// Adds an object to a collection
+        /// </summary>
+        /// <param name="col">A collection of objects</param>
+        /// <param name="item">Object to add</param>
+        /// <returns></returns>
+        public static IEnumerable<T> Append<T>(this IEnumerable<T> col, T item)
+        {
+            return col.Concat(new[] { item });
+        }
     }
 }

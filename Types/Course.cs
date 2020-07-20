@@ -139,6 +139,9 @@ namespace UvA.DataNose.Connectors.Canvas
         public List<Enrollment> UserEnrollments => _UserEnrollments ?? (_UserEnrollments = Connector.RetrieveCollection<Enrollment>(this, param: ("user_id", "self")));
 
         public List<Enrollment> GetEnrollmentsByType(EnrollmentType type) => Connector.RetrieveCollection<Enrollment>(this, null, ("type", ToCanvasString(type)));
+        public List<Enrollment> GetEnrollmentsByType(EnrollmentType type, string[] sisuserIds) 
+            => Connector.RetrieveCollection<Enrollment>(this, sisuserIds.Select(i => ("sis_user_id[]", i)).Append(("type", ToCanvasString(type))).ToArray());
+
         public List<User> GetUsersByType(EnrollmentType type) => Connector.RetrieveCollection<User>(this, null, ("enrollment_type", type.ToString().ToLower()));
 
         private List<Folder> _Folders;
