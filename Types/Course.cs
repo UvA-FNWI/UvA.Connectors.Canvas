@@ -88,6 +88,11 @@ namespace UvA.DataNose.Connectors.Canvas
         [DataMember(Name = "enroll_me")]
         public bool? EnrollCurrentUser { get; set; }
 
+        [JsonProperty("is_public")]
+        public bool? HasVisibilityPublic { get; set; }
+        [JsonProperty("is_public_to_auth_users")]
+        public bool? HasVisibilityInstitution { get; set; }
+
         /// <summary>
         /// Sets the TermID based on SIS term ID
         /// </summary>
