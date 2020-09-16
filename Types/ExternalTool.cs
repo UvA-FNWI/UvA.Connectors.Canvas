@@ -17,6 +17,20 @@ namespace UvA.DataNose.Connectors.Canvas
         [EnumMember(Value = "public")] Public
     }
 
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum ToolVisibility
+    {
+        [EnumMember(Value = "members")] Members,
+        [EnumMember(Value = "admins")] Teachers
+    }
+
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum NavigationVisibility
+    {
+        [EnumMember(Value = "disabled")] Hide,
+        [EnumMember(Value = "enabled")] Show
+    }
+
     public class ExternalTool : CanvasObject
     {
         public ExternalTool(CanvasApiConnector conn) { Connector = conn; }
@@ -43,5 +57,20 @@ namespace UvA.DataNose.Connectors.Canvas
         public string Url { get; set; }
         [JsonProperty("custom_fields")]
         public Dictionary<string, string> CustomFields { get; set; }
+        [JsonProperty("course_navigation")]
+        public NavigationSettings CourseNavigationSettings { get; set; }
+    }
+
+    public class NavigationSettings
+    {
+        [JsonProperty("text")]
+        public string Text { get; set; }
+        [JsonProperty("visibility")]
+        public ToolVisibility? Visibility { get; set; }
+        [JsonProperty("default")]
+        public NavigationVisibility ShowInNavigation { get; set; }
+        [JsonProperty("enabled")]
+        public bool? IsEnabled { get; set; }
+
     }
 }
