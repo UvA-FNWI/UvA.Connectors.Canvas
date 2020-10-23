@@ -57,6 +57,10 @@ namespace UvA.DataNose.Connectors.Canvas
         public double? PointsPossible { get; set; }
         [JsonProperty("due_at")]
         public DateTime? DueDate { get; set; }
+        [JsonProperty("lock_at")]
+        public DateTime? AvailableFrom { get; set; }
+        [JsonProperty("unlock_at")]
+        public DateTime? AvailableUntil { get; set; }
         [JsonProperty("submission_types")]
         public SubmissionType[] SubmissionTypes { get; set; }
         [JsonProperty("muted")]
@@ -73,6 +77,8 @@ namespace UvA.DataNose.Connectors.Canvas
         public string SecureParameters { get; set; }
         [JsonProperty("rubric")]
         public RubricCriterion[] RubricCriteria { get; set; }
+        [JsonProperty("only_visible_to_overrides")]
+        public bool? IsOverrideOnly { get; set; }
         
         /// <summary>
         /// Undocumented property. Should be 'online' to set a similarity checking tool
@@ -94,6 +100,10 @@ namespace UvA.DataNose.Connectors.Canvas
         private List<Submission> _Submissions;
         [JsonIgnore]
         public List<Submission> Submissions => _Submissions ?? (_Submissions = Connector.RetrieveCollection<Submission>(this, "user"));
+
+        private List<AssignmentOverride> _Overrides;
+        [JsonIgnore]
+        public List<AssignmentOverride> Overrides => _Overrides ?? (_Overrides = Connector.RetrieveCollection<AssignmentOverride>(this, path: "override"));
 
         public void LoadSubmissions(bool includeRubric = false) => _Submissions = Connector.RetrieveCollection<Submission>(this, "user", includeRubric ? ("include[]", "rubric_assessment") : ((string,string)?)null );
         public void SaveSubmissions(IEnumerable<Submission> subs)

@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.12.0</Version>
+    <Version>0.13.0</Version>
     <Authors>UvA-FNWI</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Connector for the Instructure Canvas REST API</Description>
-    <PackageReleaseNotes>Add external tool course nav settings</PackageReleaseNotes>
+    <PackageReleaseNotes>Add assignment overrides</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
