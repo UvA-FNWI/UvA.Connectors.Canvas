@@ -17,6 +17,8 @@ namespace UvA.DataNose.Connectors.Canvas
 
         [JsonProperty("name")]
         public string Name { get; set; }
+        [JsonProperty("email")]
+        public string Email { get; set; }
         [JsonProperty("sortable_name")]
         public string SortableName { get; set; }
         [JsonProperty("sis_user_id")]
