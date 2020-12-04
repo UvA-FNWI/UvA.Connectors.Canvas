@@ -181,6 +181,10 @@ namespace UvA.DataNose.Connectors.Canvas
         [JsonIgnore]
         public List<ContentMigration> ContentMigrations => _ContentMigrations ?? (_ContentMigrations = Connector.RetrieveCollection<ContentMigration>(this, path: "content_migration"));
 
+        private List<Collaboration> _Collaborations;
+        [JsonIgnore]
+        public List<Collaboration> Collaborations => _Collaborations ?? (_Collaborations = Connector.RetrieveCollection<Collaboration>(this, path: "collaboration"));
+
         [JsonIgnore]
         public IEnumerable<Tab> Tabs => Connector.RetrieveArray<Tab>($"{SaveUrl}/tabs");
         public void UpdateTab(Tab tab) => Connector.Update($"{SaveUrl}/tabs/{tab.ID}",
