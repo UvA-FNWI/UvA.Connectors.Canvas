@@ -192,7 +192,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
         [JsonIgnore]
         public IEnumerable<CalendarEvent> CalendarEvents
-            => Connector.RetrieveArray<CalendarEvent>($"calendar_events?all_events=true&context_codes[]=course_{ID}");
+            => Connector.RetrieveCollection<CalendarEvent>($"calendar_events?all_events=true&context_codes[]=course_{ID}");
 
         public void SetFeatureFlag(FeatureFlag flag, FlagState state)
             => Connector.Update($"{SaveUrl}/features/flags/{ToCanvasString(flag)}", ("state", ToCanvasString(state)));

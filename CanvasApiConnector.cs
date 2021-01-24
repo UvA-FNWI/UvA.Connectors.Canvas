@@ -143,7 +143,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
         internal IEnumerable<T> RetrieveArray<T>(string url) => JsonConvert.DeserializeObject<T[]>(Request(url, "GET"), Settings);
 
-        List<T> RetrieveCollection<T>(string url) where T : CanvasObject
+        internal List<T> RetrieveCollection<T>(string url) where T : CanvasObject
         {
             var s = Request(url, "GET");
 
