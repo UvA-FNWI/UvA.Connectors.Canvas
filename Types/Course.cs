@@ -190,6 +190,10 @@ namespace UvA.DataNose.Connectors.Canvas
         public void UpdateTab(Tab tab) => Connector.Update($"{SaveUrl}/tabs/{tab.ID}",
             ("hidden", tab.IsHidden));
 
+        [JsonIgnore]
+        public IEnumerable<CalendarEvent> CalendarEvents
+            => Connector.RetrieveArray<CalendarEvent>($"calendar_events?all_events=true&context_codes[]=course_{ID}");
+
         public void SetFeatureFlag(FeatureFlag flag, FlagState state)
             => Connector.Update($"{SaveUrl}/features/flags/{ToCanvasString(flag)}", ("state", ToCanvasString(state)));
 
