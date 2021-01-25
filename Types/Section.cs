@@ -24,5 +24,7 @@ namespace UvA.DataNose.Connectors.Canvas
         public bool? RestrictEnrollmentsToSectionDates { get; set; }
         [JsonProperty("sis_section_id")]
         public string SISSectionID { get; set; }
+        [JsonProperty("enable_sis_reactivation")]
+        public bool? EnableSISReactivation { get; set; }
     }
 }
