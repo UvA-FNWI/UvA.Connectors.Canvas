@@ -13,7 +13,11 @@ namespace UvA.DataNose.Connectors.Canvas
     public enum ContentMigrationType
     {
         [EnumMember(Value = "common_cartridge_importer")] CommonCartridgeImport,
-        [EnumMember(Value = "course_copy_importer")] CourseCopy
+        [EnumMember(Value = "course_copy_importer")] CourseCopy,
+        [EnumMember(Value = "zip_file_importer")] ZipFileImport,
+        [EnumMember(Value = "qti_converter")] QtiImport,
+        [EnumMember(Value = "moodle_converter")] MoodleImport,
+        [EnumMember(Value = "canvas_cartridge_importer")] CanvasCartridgeImport
     }
     [JsonConverter(typeof(StringEnumConverter))]
     public enum MigrationState
