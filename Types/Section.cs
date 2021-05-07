@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace UvA.DataNose.Connectors.Canvas
 {
@@ -26,5 +27,9 @@ namespace UvA.DataNose.Connectors.Canvas
         public string SISSectionID { get; set; }
         [JsonProperty("enable_sis_reactivation")]
         public bool? EnableSISReactivation { get; set; }
+
+        private List<Enrollment> _Enrollments;
+        [JsonIgnore]
+        public List<Enrollment> Enrollments => _Enrollments ?? (_Enrollments = Connector.RetrieveCollection<Enrollment>(this));
     }
 }
