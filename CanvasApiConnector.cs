@@ -205,7 +205,7 @@ namespace UvA.DataNose.Connectors.Canvas
         // TODO: switch to JSON for all relevant types and make sure this doesn't break anything
         bool UseJSON(CanvasObject o) => o is ExternalTool || o is Assignment || o is Folder || o is File || o is Course 
             || o is DiscussionEntry || o is DiscussionReply || o is Discussion || o is Page || o is ContentMigration
-            || o is QuizReport || o is AssignmentOverride;
+            || o is QuizReport || o is AssignmentOverride || o is Conversation;
 
         internal JToken Get(string url) => JToken.Parse(Request(url, "GET"));
 
@@ -241,7 +241,10 @@ namespace UvA.DataNose.Connectors.Canvas
         {
             var response = Request(o.SaveUrl, "POST", payload: GetPayload(o), contentType: UseJSON(o)? "application/json" : "application/x-www-form-urlencoded");
             o.isRetrieved = true;
-            JsonConvert.PopulateObject(response, o, Settings);
+            if (o is Conversation) // this returns an array!?
+                JsonConvert.PopulateObject(JArray.Parse(response)[0].ToString(), o, Settings);
+            else
+                JsonConvert.PopulateObject(response, o, Settings);
 
             // TODO, insert into collections..
         }
