@@ -55,6 +55,8 @@ namespace UvA.DataNose.Connectors.Canvas
         public string Description { get; set; }
         [JsonProperty("url")]
         public string Url { get; set; }
+        [JsonProperty("client_id")]
+        public string ClientId { get; set; }
         [JsonProperty("custom_fields")]
         public Dictionary<string, string> CustomFields { get; set; }
         [JsonProperty("course_navigation")]
