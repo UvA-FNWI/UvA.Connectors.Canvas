@@ -33,6 +33,7 @@ namespace UvA.DataNose.Connectors.Canvas
         internal override string CanvasObjectID => "enrollment";
         internal override string SaveUrl => CourseID != null ? $"courses/{CourseID}/enrollments/{ID}"
             : SISCourseID != null ? $"courses/sis_course_id:{SISCourseID}/enrollments"
+            : SectionID != null ? $"sections/{SectionID}/enrollments"
             : $"sections/sis_section_id:{SISSectionID}/enrollments";
 
         [JsonProperty("course_section_id")]
