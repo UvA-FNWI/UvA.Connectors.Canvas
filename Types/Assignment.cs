@@ -33,7 +33,8 @@ namespace UvA.DataNose.Connectors.Canvas
         [EnumMember(Value = "online_text_entry")] TextEntry,
         [EnumMember(Value = "online_url")] Url,
         [EnumMember(Value = "not_graded")] NotGraded,
-        [EnumMember(Value = "wiki_page")] Page
+        [EnumMember(Value = "wiki_page")] Page,
+        [EnumMember(Value = "student_annotation")] StudentAnnotation
     }
 
     public class Assignment : CanvasObject
