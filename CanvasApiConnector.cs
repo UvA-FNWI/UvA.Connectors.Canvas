@@ -205,7 +205,7 @@ namespace UvA.DataNose.Connectors.Canvas
         // TODO: switch to JSON for all relevant types and make sure this doesn't break anything
         bool UseJSON(CanvasObject o) => o is ExternalTool || o is Assignment || o is Folder || o is File || o is Course 
             || o is DiscussionEntry || o is DiscussionReply || o is Discussion || o is Page || o is ContentMigration
-            || o is QuizReport || o is AssignmentOverride || o is Conversation;
+            || o is QuizReport || o is AssignmentOverride || o is Conversation || o is Section;
 
         internal JToken Get(string url) => JToken.Parse(Request(url, "GET"));
 
