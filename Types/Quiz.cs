@@ -51,6 +51,10 @@ namespace UvA.DataNose.Connectors.Canvas
         public int UserID { get; set; }
         [JsonProperty("finished_at")]
         public DateTime? FinishedDate { get; set; }
+        [JsonProperty("score")]
+        public double? Score { get; set; }
+        [JsonProperty("attempt")]
+        public int? Attempt { get; set; }
 
         [JsonIgnore]
         public IEnumerable<QuizSubmissionQuestion> Answers => Connector.Get($"quiz_submissions/{ID}/questions")["quiz_submission_questions"].ToObject<QuizSubmissionQuestion[]>();
