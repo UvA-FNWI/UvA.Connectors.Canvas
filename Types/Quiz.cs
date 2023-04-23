@@ -31,6 +31,10 @@ namespace UvA.DataNose.Connectors.Canvas
         public DateTime? DueDate { get; set; }
         [JsonProperty("assignment_group_id")]
         public int? AssignmentGroupID { get; set; }
+        [JsonProperty("points_possible")]
+        public int? PointsPossible { get; set; }
+        [JsonProperty("quiz_type")]
+        public QuizType Type { get; set; }
 
         List<QuizSubmission> _Submissions;
         public List<QuizSubmission> Submissions => _Submissions ?? (_Submissions = Connector.RetrieveCollection<QuizSubmission>(this, path: "submission", initFunc: s => s.CourseID = CourseID ));
@@ -75,7 +79,15 @@ namespace UvA.DataNose.Connectors.Canvas
         [EnumMember(Value = "student_analysis")] StudentAnalysis,
         [EnumMember(Value = "item_analysis")] ItemAnalysis
     }
-
+    
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum QuizType
+    { 
+        [EnumMember(Value = "practice_quiz")] PracticeQuiz,
+        [EnumMember(Value = "assignment")] Assignment,
+        [EnumMember(Value = "graded_survey")] GradedSurvey,
+        [EnumMember(Value = "survey")] Survey
+    }
 
     public class QuizReport : CanvasObject
     {
