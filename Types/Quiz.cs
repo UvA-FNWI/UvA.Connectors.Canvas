@@ -32,7 +32,7 @@ namespace UvA.DataNose.Connectors.Canvas
         [JsonProperty("assignment_group_id")]
         public int? AssignmentGroupID { get; set; }
         [JsonProperty("points_possible")]
-        public int? PointsPossible { get; set; }
+        public double? PointsPossible { get; set; }
         [JsonProperty("quiz_type")]
         public QuizType Type { get; set; }
 
