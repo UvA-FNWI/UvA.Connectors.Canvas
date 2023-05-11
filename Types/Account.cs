@@ -19,7 +19,9 @@ namespace UvA.DataNose.Connectors.Canvas
         public string Name { get; set; }
         [JsonProperty("parent_account_id")]
         public int? ParentAccountID { get; set; }
-
+        [JsonProperty("sis_account_id")]
+        public string SISAccountId { get; set; }
+        
         List<Course> _Courses;
         [JsonIgnore]
         public List<Course> Courses => _Courses ?? (_Courses = Connector.RetrieveCollection<Course>(this));
