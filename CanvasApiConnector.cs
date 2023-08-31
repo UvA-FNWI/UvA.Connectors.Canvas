@@ -13,12 +13,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using UvA.Connectors.Canvas;
 using UvA.Connectors.Canvas.Helpers;
 
 
 namespace UvA.DataNose.Connectors.Canvas
 {
-    public class CanvasApiConnector
+    public class CanvasApiConnector : ICanvasApiConnector
     {
         public string TargetUrl { get; private set; }
         protected string BaseUrl { get; private set; }

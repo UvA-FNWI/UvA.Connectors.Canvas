@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.25.4</Version>
+    <Version>0.25.5</Version>
     <Authors>UvA-FNWI</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Connector for the Instructure Canvas REST API</Description>
-    <PackageReleaseNotes>Add SIS ID to accounts</PackageReleaseNotes>
+    <PackageReleaseNotes>Add interface for CanvasApiConnector</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
