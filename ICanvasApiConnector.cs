@@ -7,6 +7,7 @@ namespace UvA.Connectors.Canvas
 {
     public interface ICanvasApiConnector
     {
+        List<Assignment> FindAssignmentsById(int courseId);
         Assignment FindAssignmentById(int courseId, int assignmentId);
         Account FindAccountById(int id);
         Course FindCourseById(int id);
