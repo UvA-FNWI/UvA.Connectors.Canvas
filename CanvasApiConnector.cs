@@ -39,7 +39,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
         static JsonSerializerSettings Settings = new JsonSerializerSettings() { DateTimeZoneHandling = DateTimeZoneHandling.Local };
 
-        public List<Assignment> FindAssignmentsById(int courseId) => RetrieveCollection<Assignment>($"courses/{courseId}/assignments");
+        public List<Assignment> FindAssignmentsByCourseId(int courseId) => RetrieveCollection<Assignment>($"courses/{courseId}/assignments");
         public Assignment FindAssignmentById(int courseId, int assignmentId) => RetrieveObject<Assignment>($"courses/{courseId}/assignments/{assignmentId}");
         public Account FindAccountById(int id) => FindObjectById<Account>(id);
         public Course FindCourseById(int id) => FindObjectById<Course>(id);
