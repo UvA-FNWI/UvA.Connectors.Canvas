@@ -7,6 +7,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Connector for the Instructure Canvas REST API</Description>
     <PackageReleaseNotes>Added a new method FindAssignmentsById to retrieve a list of Assignments associated with a specified Course ID in Canvas.</PackageReleaseNotes>
+	<PackageId>UvA.Connectors.Canvas</PackageId>
+	<IsPackable>true</IsPackable>
+	<RepositoryType>git</RepositoryType>
+	<RepositoryUrl>https://github.com/UvA-FNWI/UvA.Connectors.Canvas</RepositoryUrl>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
