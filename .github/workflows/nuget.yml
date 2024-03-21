@@ -3,7 +3,7 @@ name: build and push to nuget
 on:
   push:
     branches:
-      - main
+      - feature/DN-1666-IN-Create-pipelines-for-open-source-Nuget-packages
 
 jobs:
   build:
@@ -23,11 +23,8 @@ jobs:
     - name: Build
       run: dotnet build --no-restore --configuration Release
 
-    - name: Pack
-      run: dotnet pack --no-build --configuration Release --output ./nuget
-
     - name: Push
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '8.0'
-    - run: dotnet nuget push "./nuget/*.nupkg" --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate
+    - run: dotnet nuget push "./bin/Release/*.nupkg" --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate
