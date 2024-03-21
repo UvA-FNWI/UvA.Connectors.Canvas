@@ -3,7 +3,7 @@ name: build and push to nuget
 on:
   push:
     branches:
-      - feature/DN-1666-IN-Create-pipelines-for-open-source-Nuget-packages
+      - main
 
 jobs:
   build:
