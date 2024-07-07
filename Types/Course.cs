@@ -64,7 +64,7 @@ namespace UvA.DataNose.Connectors.Canvas
         [JsonProperty("start_at")]
         public DateTime? StartDate { get; set; }
         [JsonProperty("end_at")]
-        public DateTime? EndDate{ get; set; }
+        public DateTime? EndDate { get; set; }
         [JsonProperty("course_code")]
         public string CourseCode { get; set; }
         [JsonProperty("sis_course_id")]
@@ -75,6 +75,9 @@ namespace UvA.DataNose.Connectors.Canvas
         public bool UseOverrideDates { get; set; }
         [JsonProperty("workflow_state")]
         public CourseState State { get; set; }
+
+        [JsonProperty("course_image")]
+        public string Image { get; set; }
 
         [JsonProperty("grading_standard_enabled")]
         public bool? EnableGradingScheme { get; set; }
@@ -144,7 +147,7 @@ namespace UvA.DataNose.Connectors.Canvas
         public List<Enrollment> UserEnrollments => _UserEnrollments ?? (_UserEnrollments = Connector.RetrieveCollection<Enrollment>(this, param: ("user_id", "self")));
 
         public List<Enrollment> GetEnrollmentsByType(EnrollmentType type) => Connector.RetrieveCollection<Enrollment>(this, null, ("type", ToCanvasString(type)));
-        public List<Enrollment> GetEnrollmentsByType(EnrollmentType type, string[] sisuserIds) 
+        public List<Enrollment> GetEnrollmentsByType(EnrollmentType type, string[] sisuserIds)
             => Connector.RetrieveCollection<Enrollment>(this, sisuserIds.Select(i => ("sis_user_id[]", i)).Append(("type", ToCanvasString(type))).ToArray());
 
         public List<User> GetUsersByType(EnrollmentType type) => Connector.RetrieveCollection<User>(this, null, ("enrollment_type", type.ToString().ToLower()));
