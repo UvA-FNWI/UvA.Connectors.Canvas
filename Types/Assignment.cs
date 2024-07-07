@@ -54,6 +54,8 @@ namespace UvA.DataNose.Connectors.Canvas
         public GradingType GradingType { get; set; }
         [JsonProperty("published")]
         public bool IsPublished { get; set; }
+        [JsonProperty("html_url")]
+        public string Url { get; set; }
         [JsonProperty("points_possible")]
         public double? PointsPossible { get; set; }
         [JsonProperty("due_at")]
@@ -80,7 +82,7 @@ namespace UvA.DataNose.Connectors.Canvas
         public RubricCriterion[] RubricCriteria { get; set; }
         [JsonProperty("only_visible_to_overrides")]
         public bool? IsOverrideOnly { get; set; }
-        
+
         /// <summary>
         /// Undocumented property. Should be 'online' to set a similarity checking tool
         /// </summary>
@@ -106,7 +108,7 @@ namespace UvA.DataNose.Connectors.Canvas
         [JsonIgnore]
         public List<AssignmentOverride> Overrides => _Overrides ?? (_Overrides = Connector.RetrieveCollection<AssignmentOverride>(this, path: "override"));
 
-        public void LoadSubmissions(bool includeRubric = false) => _Submissions = Connector.RetrieveCollection<Submission>(this, "user", includeRubric ? ("include[]", "rubric_assessment") : ((string,string)?)null );
+        public void LoadSubmissions(bool includeRubric = false) => _Submissions = Connector.RetrieveCollection<Submission>(this, "user", includeRubric ? ("include[]", "rubric_assessment") : ((string, string)?)null);
         public void SaveSubmissions(IEnumerable<Submission> subs)
             => Connector.Create($"{SaveUrl}/submissions/update_grades", subs.Select(s => s.IsExcused == true ? ($"grade_data[{s.UserID}][excuse]", (object)"true") : ($"grade_data[{s.UserID}][posted_grade]", s.PostedGrade)).ToArray());
     }
@@ -131,7 +133,7 @@ namespace UvA.DataNose.Connectors.Canvas
         /// Only value observed so far: context_external_tool
         /// </summary>
         [JsonProperty("content_type")]
-        public string ContentType { get; set; } 
+        public string ContentType { get; set; }
         [JsonProperty("url")]
         public string Url { get; set; }
         [JsonProperty("new_tab")]
