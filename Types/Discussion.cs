@@ -23,6 +23,8 @@ namespace UvA.DataNose.Connectors.Canvas
         public string Title { get; set; }
         [JsonProperty("message")]
         public string Message { get; set; }
+        [JsonProperty("html_url")]
+        public string Url { get; set; }
         [JsonProperty("posted_at")]
         public DateTime? PostedAt { get; set; }
         [JsonProperty("delayed_post_at")]
