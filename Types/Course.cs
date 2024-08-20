@@ -76,7 +76,7 @@ namespace UvA.DataNose.Connectors.Canvas
         [JsonProperty("workflow_state")]
         public CourseState State { get; set; }
 
-        [JsonProperty("course_image")]
+        [JsonProperty("image_download_url")]
         public string Image { get; set; }
 
         [JsonProperty("grading_standard_enabled")]

@@ -11,6 +11,7 @@ namespace UvA.DataNose.Connectors.Canvas
     {
         public User(CanvasApiConnector conn) { Connector = conn; }
 
+        public IEnumerable<Course> GetCourses(bool includeImage) => Connector.RetrieveCollection<Course>(this, param: ("include[]", "course_image"));
         public override string ToString() => $"User {Name}";
         internal override string CanvasObjectID => "user";
         internal override string SaveUrl => $"users/{ID}";
