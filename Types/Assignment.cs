@@ -104,6 +104,8 @@ namespace UvA.DataNose.Connectors.Canvas
         [JsonIgnore]
         public List<Submission> Submissions => _Submissions ?? (_Submissions = Connector.RetrieveCollection<Submission>(this, "user"));
 
+        public List<Submission> SubmissionsWithoutUser => _Submissions ?? (_Submissions = Connector.RetrieveCollection<Submission>(this));
+        
         private List<AssignmentOverride> _Overrides;
         [JsonIgnore]
         public List<AssignmentOverride> Overrides => _Overrides ?? (_Overrides = Connector.RetrieveCollection<AssignmentOverride>(this, path: "override"));

@@ -45,6 +45,10 @@ namespace UvA.DataNose.Connectors.Canvas
         public Course FindCourseById(int id) => FindObjectById<Course>(id);
         public Section FindSectionById(int id) => FindObjectById<Section>(id);
         public Course FindCourseById(string sisId) => RetrieveObject<Course>($"courses/sis_course_id:{sisId}");
+
+        public Course FindCourseById(int id, bool includeImage) => includeImage
+            ? RetrieveObject<Course>($"courses/{id}/include[]=course_image")
+            : FindCourseById(id);
         public AppointmentGroup FindAppointmentGroupById(int id) => FindObjectById<AppointmentGroup>(id);
 
         public List<CalendarEvent> GetEvents(string userLoginId, int[] courseIds, DateTime startDate, DateTime endDate, EventType? targetType = null) => 
