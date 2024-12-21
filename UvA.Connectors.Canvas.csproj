@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.25.8</Version>
+    <Version>0.25.9</Version>
     <Authors>UvA-FNWI</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Connector for the Instructure Canvas REST API</Description>
-    <PackageReleaseNotes>Load submissions without user data</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix assignment saving</PackageReleaseNotes>
 	<PackageId>UvA.Connectors.Canvas</PackageId>
 	<IsPackable>true</IsPackable>
 	<RepositoryType>git</RepositoryType>

@@ -28,7 +28,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
         List<Term> _Terms;
         /// <summary>
-        /// Retrieves the terms for the room account (throws an exception on subaccounts)
+        /// Retrieves the terms for the root account (throws an exception on subaccounts)
         /// </summary>
         [JsonIgnore]
         public List<Term> Terms => _Terms ?? (_Terms = Connector.RetrieveCollection<Term>(this));

@@ -14,7 +14,7 @@ namespace UvA.DataNose.Connectors.Canvas
         public IEnumerable<Course> GetCourses(string include) => Connector.RetrieveCollection<Course>(this, param: ("include[]", include));
         public override string ToString() => $"User {Name}";
         internal override string CanvasObjectID => "user";
-        internal override string SaveUrl => $"users/{ID}";
+        internal override string SaveUrl => ID == 0 ? $"accounts/1/users" : $"users/{ID}";
 
         [JsonProperty("name")]
         public string Name { get; set; }
