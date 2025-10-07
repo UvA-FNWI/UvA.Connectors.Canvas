@@ -24,7 +24,7 @@ namespace UvA.DataNose.Connectors.Canvas
         public string TargetUrl { get; private set; }
         protected string BaseUrl { get; private set; }
         private string AccessToken;
-        protected string UserAgent = "CanvasConnector";
+        private static string UserAgent = "CanvasConnector";
         protected string Page { get; private set; }
         string NextUrl;
 
@@ -299,6 +299,7 @@ namespace UvA.DataNose.Connectors.Canvas
         public void DownloadFile(string path, string fileName)
         {
             WebClient client = new WebClient();
+            client.Headers.Add("User-Agent", UserAgent);
             client.Headers.Add("Authorization", $"Bearer {AccessToken}");
             client.DownloadFile(path, fileName);
         }
@@ -319,6 +320,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
             protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
             {
+                request.Headers.Add("User-Agent", UserAgent);
                 request.Headers.Add("Authorization", $"Bearer {AccessToken}");
                 return base.SendAsync(request, cancellationToken);
             }
