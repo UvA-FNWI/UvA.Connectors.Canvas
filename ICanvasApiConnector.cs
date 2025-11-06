@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UvA.DataNose.Connectors.Canvas;
 using Newtonsoft.Json.Linq;
 
@@ -26,7 +27,7 @@ namespace UvA.Connectors.Canvas
         void Create(CanvasObject o);
 
         void DownloadFile(string path, string fileName);
-        void SetPostPolicy(int courseId, bool postManually);
+        Task SetPostPolicy(int courseId, bool postManually);
 
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 
 namespace UvA.DataNose.Connectors.Canvas
 {
@@ -199,6 +200,22 @@ namespace UvA.DataNose.Connectors.Canvas
 
         public void SetFeatureFlag(FeatureFlag flag, FlagState state)
             => Connector.Update($"{SaveUrl}/features/flags/{ToCanvasString(flag)}", ("state", ToCanvasString(state)));
+
+        
+        public async Task<IEnumerable<Submission>> GetAssignmentsSubmissions(List<int> assignmentIDs, string[] canvasUserIDs = null, bool gradedOnly = true)
+        {
+            List<Submission> submissions = [];
+            foreach (var assignment in assignmentIDs)
+            {
+                var subs = await Connector.GetAssignmentSubmissions(assignment, gradedOnly);
+                submissions = submissions.Concat(subs).ToList();
+            }
+
+            if (canvasUserIDs is { Length: > 0 })
+                submissions = submissions.Where(s => canvasUserIDs.Contains(s.UserID)).ToList();
+
+            return submissions;
+        } 
 
         /// <summary>
         /// Returns all graded submissions for the course, with limited fields for performance reasons

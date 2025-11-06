@@ -1,0 +1,33 @@
+query GetAssignmentSubmission(
+    $assignmentId: ID!
+    $gradingStatus: SubmissionGradingStatus
+    $after: String
+) {
+    assignment(id: $assignmentId) {
+        submissionsConnection(
+            first: 100
+            filter: {
+                gradingStatus: $gradingStatus
+            }
+            after: $after
+        ) {
+            pageInfo {
+                hasNextPage
+                endCursor
+                startCursor
+            }
+            nodes {
+                id
+                submittedAt
+                gradedAt
+                score
+                grade
+                excused
+                missing
+                state
+                assignmentId
+                userId
+            }
+        }
+    }
+}
