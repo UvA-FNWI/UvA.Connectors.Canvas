@@ -312,7 +312,7 @@ namespace UvA.DataNose.Connectors.Canvas
 
 
         /// <summary>
-        /// Gets all submissions for a specific assignment using GraphQL
+        /// Gets all submissions for a specific assignment
         /// </summary>
         /// <param name="assignmentId">The assignment ID</param>
         /// <param name="gradedOnly">Graded status filter</param>
