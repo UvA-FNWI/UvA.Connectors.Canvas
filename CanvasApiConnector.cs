@@ -1,20 +1,17 @@
-﻿using GraphQL;
-using GraphQL.Client.Http;
-using GraphQL.Client.Serializer.Newtonsoft;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using UvA.Connectors.Canvas;
+using UvA.Connectors.Canvas.GraphQL;
 using UvA.Connectors.Canvas.Helpers;
+using UvA.DataNose.Connectors.Canvas.Generated;
 
 
 namespace UvA.DataNose.Connectors.Canvas
@@ -304,50 +301,29 @@ namespace UvA.DataNose.Connectors.Canvas
             client.DownloadFile(path, fileName);
         }
 
-        GraphQLHttpClient _Client;
-        GraphQLHttpClient Client => _Client ?? (_Client = new GraphQLHttpClient(new GraphQLHttpClientOptions
-        {
-            EndPoint = new Uri(BaseUrl.Replace("v1", "graphql")),
-            HttpMessageHandler = new BearerTokenHandler
-            {
-                AccessToken = AccessToken
-            }
-        }, new NewtonsoftJsonSerializer()));
+        CanvasGraphQLService _GraphQLService;
+        CanvasGraphQLService GraphQLService => _GraphQLService ??= CanvasGraphQLServiceFactory.Create(TargetUrl, AccessToken, UserAgent);
 
-        class BearerTokenHandler : HttpClientHandler
-        {
-            public string AccessToken { get; set; }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-            {
-                request.Headers.Add("User-Agent", UserAgent);
-                request.Headers.Add("Authorization", $"Bearer {AccessToken}");
-                return base.SendAsync(request, cancellationToken);
-            }
+        public Task SetPostPolicy(int courseId, bool postManually)
+        {
+            return GraphQLService.SetCoursePostPolicy(courseId.ToString(), postManually);
         }
 
-        public void SetPostPolicy(int courseId, bool postManually)
+
+        /// <summary>
+        /// Gets all submissions for a specific assignment using GraphQL
+        /// </summary>
+        /// <param name="assignmentId">The assignment ID</param>
+        /// <param name="gradedOnly">Graded status filter</param>
+        /// <returns>List of submissions converted to SubmissionGroup format for compatibility</returns>
+        public async Task<List<Submission>> GetAssignmentSubmissions(
+            int assignmentId, bool gradedOnly = true)
         {
-            var res = Client.SendMutationAsync<JObject>(new GraphQLRequest
-            {
-                Query = @"
-                mutation SetPolicy($courseId: ID!, $postManually: Boolean!) {
-                  setCoursePostPolicy(input: {courseId: $courseId , postManually: $postManually}) {
-                    postPolicy {
-                      postManually
-                    }
-                  }
-                }
-                ",
-                OperationName = "SetPolicy",
-                Variables = new
-                {
-                    courseId,
-                    postManually
-                }
-            }).Result;
-            if (res.Errors?.Any() == true)
-                throw new Exception(res.Errors.First().Message);
+            return await GraphQLService.GetAssignmentSubmissions(
+                assignmentId.ToString(),
+                this,
+                gradedOnly ? SubmissionGradingStatus.Graded : null);
         }
     }
 }

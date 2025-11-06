@@ -1,0 +1,14 @@
+{
+  "schema": "GraphQL/schema.graphql",
+  "documents": "GraphQL/*.graphql",
+  "extensions": {
+    "strawberryShake": {
+      "name": "CanvasGraphQLClient", 
+      "namespace": "UvA.DataNose.Connectors.Canvas.Generated",
+      "dependencyInjection": true,
+      "strictSchemaValidation": false,
+      "requestStrategy": "Default",
+      "outputDirectoryName": "Generated"
+    }
+  }
+}

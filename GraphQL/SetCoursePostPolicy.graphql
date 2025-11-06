@@ -1,0 +1,7 @@
+mutation SetCoursePostPolicy($courseId: ID!, $postManually: Boolean!) {
+  setCoursePostPolicy(input: {courseId: $courseId, postManually: $postManually}) {
+    postPolicy {
+      postManually
+    }
+  }
+}
