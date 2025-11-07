@@ -60,64 +60,40 @@ namespace UvA.Connectors.Canvas.GraphQL
         /// Generic pagination helper for GraphQL queries with cursor-based pagination
         /// </summary>
         /// <typeparam name="TNode">The type of node being paginated</typeparam>
-        /// <typeparam name="TPageInfo">The type of page info (must have HasNextPage and EndCursor)</typeparam>
         /// <param name="fetchPage">Function that fetches a single page given a cursor, returns (nodes, pageInfo, errors)</param>
         /// <returns>All collected nodes from all pages</returns>
-        private async Task<List<TNode>> PaginateQueryAsync<TNode, TPageInfo>(
-            Func<string?, Task<(IEnumerable<TNode?>? nodes, TPageInfo? pageInfo, IReadOnlyList<IClientError>? errors)>> fetchPage)
+        private async Task<List<TNode>> PaginateQuery<TNode>(
+            Func<string?, Task<(IEnumerable<TNode?> Nodes,
+                bool HasNextPage,
+                string? EndCursor,
+                IReadOnlyList<IClientError>? Errors)>> fetchPage)
         {
             var allNodes = new List<TNode>();
             string? cursor = null;
-            var hasNextPage = true;
 
-            while (hasNextPage)
+            while (true)
             {
-                try
+                var (nodes, hasNextPage, endCursor, errors) = await fetchPage(cursor);
+
+                // Handle GraphQL errors
+                if (errors is { Count: > 0 })
                 {
-                    var (nodes, pageInfo, errors) = await fetchPage(cursor);
-
-                    // Check for GraphQL errors
-                    if (errors != null && errors.Any())
-                    {
-                        var errorMessages = string.Join(", ", errors.Select(e => e.ToString()));
-                        throw new Exception($"GraphQL Error: {errorMessages}");
-                    }
-
-                    // Extract page info using reflection to get HasNextPage and EndCursor
-                    if (pageInfo != null)
-                    {
-                        var hasNextPageProperty = pageInfo.GetType().GetProperty("HasNextPage");
-                        var endCursorProperty = pageInfo.GetType().GetProperty("EndCursor");
-
-                        if (hasNextPageProperty != null && endCursorProperty != null)
-                        {
-                            hasNextPage = (bool)(hasNextPageProperty.GetValue(pageInfo) ?? false);
-                            cursor = endCursorProperty.GetValue(pageInfo) as string;
-                        }
-                        else
-                        {
-                            hasNextPage = false;
-                        }
-                    }
-                    else
-                    {
-                        hasNextPage = false;
-                    }
-
-                    // Add nodes if available
-                    if (nodes != null)
-                    {
-                        allNodes.AddRange(nodes.Where(n => n != null).Cast<TNode>());
-                    }
-                    else
-                    {
-                        hasNextPage = false;
-                    }
+                    var message = string.Join(", ", errors.Select(e => e.Message));
+                    throw new Exception($"GraphQL Error: {message}");
                 }
-                catch (Exception ex)
+
+                // Collect nodes
+                if (nodes != null)
                 {
-                    throw new Exception($"Failed to fetch: {ex.Message}", ex);
+                    // Filter nulls defensively (StrawberryShake types can be nullable)
+                    allNodes.AddRange(nodes.Where(n => n is not null));
                 }
+
+                // Stop if no next page or no usable cursor
+                if (!hasNextPage || string.IsNullOrWhiteSpace(endCursor))
+                    break;
+
+                cursor = endCursor;
             }
 
             return allNodes;
@@ -128,23 +104,25 @@ namespace UvA.Connectors.Canvas.GraphQL
             CanvasApiConnector connector,
             SubmissionGradingStatus? gradingStatus = null)
         {
-            var allSubmissions = await PaginateQueryAsync<IGetAssignmentSubmission_Assignment_SubmissionsConnection_Nodes, IGetAssignmentSubmission_Assignment_SubmissionsConnection_PageInfo>(
-                async cursor =>
-                {
-                    var result = await _client.GetAssignmentSubmission.ExecuteAsync(
-                        assignmentId: assignmentId,
-                        gradingStatus: gradingStatus,
-                        after: cursor);
+            var allNodes = await PaginateQuery(async cursor =>
+            {
+                var result = await _client.GetAssignmentSubmission.ExecuteAsync(
+                    assignmentId: assignmentId,
+                    gradingStatus: gradingStatus,
+                    after: cursor);
 
-                    return (
-                        result.Data?.Assignment?.SubmissionsConnection?.Nodes,
-                        result.Data?.Assignment?.SubmissionsConnection?.PageInfo,
-                        result.Errors
-                    );
-                }
-            );
+                var connection = result.Data?.Assignment?.SubmissionsConnection;
+                var pageInfo = connection?.PageInfo;
 
-            return ConvertToSubmissions(allSubmissions, connector);
+                return (
+                    Nodes: connection?.Nodes ?? Enumerable.Empty<IGetAssignmentSubmission_Assignment_SubmissionsConnection_Nodes>(),
+                    HasNextPage: pageInfo?.HasNextPage ?? false,
+                    pageInfo?.EndCursor,
+                    result.Errors
+                );
+            });
+
+            return ConvertToSubmissions(allNodes, connector);
         }
 
         private List<Submission> ConvertToSubmissions(
