@@ -138,6 +138,7 @@ namespace UvA.Connectors.Canvas.GraphQL
                 Score = s.Score,
                 Grade = s.Grade ?? string.Empty,
                 AssignmentID = int.Parse(s.AssignmentId),
+                IsExcused = s.Excused,
                 Connector = connector
             }).ToList();
         }
